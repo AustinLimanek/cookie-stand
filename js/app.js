@@ -58,13 +58,14 @@ let seattle = {
   },
 
   displayCookiePerHour: function (){
-    let cookiePrint = document.getElementById('results');
-    //let cityElement = document.createElement('h2');
-    //cityElement.textContent = 'Seattle';
-    //cookiePrint.appendChild(cityElement);
+    let cookiePrintByCity = document.getElementById('results');
+    
+    let nameElement = document.createElement('h3');
+    cookiePrintByCity.appendChild(nameElement);
+    nameElement.textContent = 'Seattle';
 
     let listElement = document.createElement('ul');
-    cookiePrint.appendChild(listElement);
+    cookiePrintByCity.appendChild(listElement);
 
     for (let i = 0; i < hoursOpen; i++){
       let listItemElement = document.createElement('li');
@@ -105,10 +106,14 @@ let tokyo = {
   },
 
   displayCookiePerHour: function (){
-    let cookiePrint = document.getElementById('results');
-
+    let cookiePrintByCity = document.getElementById('results');
+    
+    let nameElement = document.createElement('h3');
+    cookiePrintByCity.appendChild(nameElement);
+    nameElement.textContent = 'Tokyo';
+    
     let listElement = document.createElement('ul');
-    cookiePrint.appendChild(listElement);
+    cookiePrintByCity.appendChild(listElement);
 
     for (let i = 0; i < hoursOpen; i++){
       let listItemElement = document.createElement('li');
@@ -149,10 +154,14 @@ let dubai = {
   },
 
   displayCookiePerHour: function (){
-    let cookiePrint = document.getElementById('results');
+    let cookiePrintByCity = document.getElementById('results');
+    
+    let nameElement = document.createElement('h3');
+    cookiePrintByCity.appendChild(nameElement);
+    nameElement.textContent = 'Dubai';
 
     let listElement = document.createElement('ul');
-    cookiePrint.appendChild(listElement);
+    cookiePrintByCity.appendChild(listElement);
 
     for (let i = 0; i < hoursOpen; i++){
       let listItemElement = document.createElement('li');
@@ -193,10 +202,14 @@ let paris = {
   },
 
   displayCookiePerHour: function (){
-    let cookiePrint = document.getElementById('results');
+    let cookiePrintByCity = document.getElementById('results');
+    
+    let nameElement = document.createElement('h3');
+    cookiePrintByCity.appendChild(nameElement);
+    nameElement.textContent = 'Paris';
 
     let listElement = document.createElement('ul');
-    cookiePrint.appendChild(listElement);
+    cookiePrintByCity.appendChild(listElement);
 
     for (let i = 0; i < hoursOpen; i++){
       let listItemElement = document.createElement('li');
@@ -237,10 +250,14 @@ let lima = {
   },
 
   displayCookiePerHour: function (){
-    let cookiePrint = document.getElementById('results');
+    let cookiePrintByCity = document.getElementById('results');
+    
+    let nameElement = document.createElement('h3');
+    cookiePrintByCity.appendChild(nameElement);
+    nameElement.textContent = 'Lima';
 
     let listElement = document.createElement('ul');
-    cookiePrint.appendChild(listElement);
+    cookiePrintByCity.appendChild(listElement);
 
     for (let i = 0; i < hoursOpen; i++){
       let listItemElement = document.createElement('li');
