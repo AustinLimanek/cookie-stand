@@ -5,3 +5,14 @@ h1 {
 nav {
   text-align: center;
 }
+
+table {
+  border: thin black line;
+  margin: 20 px;
+}
+
+td {
+  text-align: center;
+  border: black;
+  margin: 10 px;
+}
