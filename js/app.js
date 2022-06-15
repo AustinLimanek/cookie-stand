@@ -156,9 +156,21 @@ function totalArray (){
 
 totalArray();
 
-function printTotal (){
-  
+function printTotal (array){
+  let tableTotal = document.createElement('tr');
+  tableEl.appendChild(tableTotal);
+  let totalEntry = document.createElement('td');
+  tableTotal.appendChild(totalEntry);
+  totalEntry.textContent = 'Totals';
+
+  for (let i = 0; i <= hoursOpen; i++) {
+    let totalEntry = document.createElement('td');
+    tableTotal.appendChild(totalEntry);
+    totalEntry.textContent = Math.round(array[i]);
+    }
 }
+
+printTotal(totalArray());
 
 // let seattle = {
 //   min: 23,
