@@ -75,7 +75,7 @@ function City(name, min, max, avgCookie){
     for (let i = 0; i < hoursOpen; i++){
       let listItemElement = document.createElement('li');
       listItemElement.textContent = time[i] + ': ' + Math.round(this.cookieSold[i]) + ' cookies';
-      listElement.appendChild(listItemElement)
+      listElement.appendChild(listItemElement);
     }
 
     let totalElement = document.createElement('li');
@@ -89,8 +89,9 @@ function City(name, min, max, avgCookie){
     tableEl.appendChild(tableRow);
     tableRow.appendChild(nameEntry);
     nameEntry.textContent = name;
+    this.cookieSold[hoursOpen] = Math.round(sumArray(this.cookieSold));
 
-    for (let i = 0; i < hoursOpen; i++){
+    for (let i = 0; i <= hoursOpen; i++){
       let dataEntry = document.createElement('td');
       dataEntry.textContent = Math.round(this.cookieSold[i]);
       tableRow.appendChild(dataEntry);
@@ -108,17 +109,56 @@ let Lima = new City(cities[4][0], cities[4][1], cities[4][2], cities[4][3]);
 
 let objCity = [Seattle, Tokyo, Dubai, Paris, Lima];
 
-objCity[0].visCount();
-objCity[0].cookCount(objCity[0].customer);
-objCity[0].displayCookiePerHour();
+function tableHead (){
+  let tableHead = document.createElement('th');
+  tableEl.appendChild(tableHead);
+  let timeEntry = document.createElement('td');
+  tableHead.appendChild(timeEntry);
+  timeEntry.textContent = "";
 
-function namePrint (){
+  for (let i = 0; i <= hoursOpen; i++) {
+    let tableHead = document.createElement('th');
+    tableEl.appendChild(tableHead);
+    let timeEntry = document.createElement('td');
+    tableHead.appendChild(timeEntry);
+    timeEntry.textContent = time[i];
+    }
+}
+
+tableHead();
+
+function genData() {
+  for (let i = 0; i < objCity.length; i++){
+    objCity[i].visCount();
+    objCity[i].cookCount(objCity[i].customer);
+  }
+}
+
+genData();
+
+function dataPrint (){
   for (let i = 0; i <5; i++){
     objCity[i].printRow();
   }
 }
 
-namePrint();
+dataPrint();
+
+function totalArray (){
+  let total = new Array(hoursOpen+1).fill(0);
+  for (let i = 0; i <= hoursOpen; i++){
+    for(let x = 0; x < objCity.length; x++){
+      total[i] += objCity[x].cookieSold[i];
+    }
+  }
+  return total;
+}
+
+totalArray();
+
+function printTotal (){
+  
+}
 
 // let seattle = {
 //   min: 23,
