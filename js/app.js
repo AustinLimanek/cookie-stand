@@ -109,23 +109,21 @@ let Lima = new City(cities[4][0], cities[4][1], cities[4][2], cities[4][3]);
 
 let objCity = [Seattle, Tokyo, Dubai, Paris, Lima];
 
-function tableHead (){
-  let tableHead = document.createElement('th');
-  tableEl.appendChild(tableHead);
-  let timeEntry = document.createElement('td');
-  tableHead.appendChild(timeEntry);
-  timeEntry.textContent = "";
+function tableHeadRow (){
+  let tableHeadRow = document.createElement('tr');
+  tableEl.appendChild(tableHeadRow);
+  let timeEntry = document.createElement('th');
+  tableHeadRow.appendChild(timeEntry);
+  timeEntry.textContent = 'Location';
 
   for (let i = 0; i <= hoursOpen; i++) {
-    let tableHead = document.createElement('th');
-    tableEl.appendChild(tableHead);
-    let timeEntry = document.createElement('td');
-    tableHead.appendChild(timeEntry);
+    let timeEntry = document.createElement('th');
+    tableHeadRow.appendChild(timeEntry);
     timeEntry.textContent = time[i];
     }
 }
 
-tableHead();
+tableHeadRow();
 
 function genData() {
   for (let i = 0; i < objCity.length; i++){
