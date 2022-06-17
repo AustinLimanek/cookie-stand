@@ -38,6 +38,18 @@ function sumArray(array){
   return sum;
 }
 
+function objNameToString(array, property){
+  let name = [];
+  for (let i = 0; i < array.length; i++){
+    name.push(Object.getOwnPropertyDescriptor(array[i], property).value);
+  }
+  return name;
+}
+
+function capFirstLetter(string){
+  return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
+}
+
 function City(name, min, max, avgCookie){
   this.name = name;
   this.min = min;
@@ -177,26 +189,34 @@ printTotal(totalArray());
 formElement.addEventListener('submit', 
   function(event){
     event.preventDefault();
-    let cityName = event.target.city.value;
+    let cityName = capFirstLetter(event.target.city.value);
     let min = parseInt(event.target.min.value);
     let max = parseInt(event.target.max.value);
     let avgCookie = parseInt(event.target.avgCookie.value);
 
-    objCity.push(new City(cityName, min, max, avgCookie));
-    console.log(objCity);
+    if (objNameToString(objCity, 'name').indexOf(cityName) === -1) {
+      objCity.push(new City(cityName, min, max, avgCookie));
+      console.log(objCity);
 
-    let table = document.getElementById('data');
-    let rowToDelete = document.getElementById('total');
-    table.removeChild(rowToDelete);
+      let table = document.getElementById('data');
+      let rowToDelete = document.getElementById('total');
+      table.removeChild(rowToDelete);
 
-    objCity[objCity.length - 1].visCount();
-    objCity[objCity.length - 1].cookCount(objCity[objCity.length - 1].customer);
-    objCity[objCity.length - 1].printRow();
+      objCity[objCity.length - 1].visCount();
+      objCity[objCity.length - 1].cookCount(objCity[objCity.length - 1].customer);
+      objCity[objCity.length - 1].printRow();
 
-    totalArray();
-    printTotal(totalArray());
+      totalArray();
+      printTotal(totalArray());
+    }
+    else { alert(cityName +' was already added. Submit only novel store locations.'); }
   }
 );
+
+let hi = objNameToString(objCity, 'name');
+
+console.log(typeof objCity[0]);
+console.log(hi);
 
 // let seattle = {
 //   min: 23,
