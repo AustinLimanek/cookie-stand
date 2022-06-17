@@ -18,7 +18,32 @@
   
   <main>
     <section id = 'results'></section>
+    <section id = 'summaryTable'></section>
+    <p>Table 1: Projected Salmon Cookie sales by location and time of day. Cummulative totals by location and time of day<br>are included. The grand total of all cookies sold in one day is also included.</p>
   </main>
+
+  <form id="newCity">
+      <fieldset>  
+        <legend>New Store Location</legend>
+          <div>
+            <label>City Location:</label>
+            <input id="city-name" name="city" type="text" placeholder="Cape Town" required>
+          </div>
+          <div>
+            <label>Minimum Number of Customers Per Hour:</label>
+            <input type=number name="min" placeholder="50" required>
+          </div>
+          <div>
+            <label>Maximum Number of Custormers Per Hour:</label>
+            <input type=number name="max" placeholder="10" required>
+          </div>
+          <div>
+            <label>Avgerage Cookies Sold Per Customer:</label>
+            <input type=number name="avgCookie" placeholder="3.7" required>
+          </div>
+          <button>Submit</button>
+      </fieldset>
+  </form>
 </body>
 
 <script src="js/app.js"></script>
