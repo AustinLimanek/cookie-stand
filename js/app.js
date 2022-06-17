@@ -7,7 +7,10 @@ let time = [];
 let cities = [['Seattle', 23, 65, 6.3], ['Tokyo', 3, 24, 1.2], ['Dubai', 11, 38, 3.7], ['Paris', 20, 38, 2.3], ['Lima', 2, 16, 4.6]];
 let tableSpace = document.getElementById('summaryTable');
 let tableEl = document.createElement('table');
+tableEl.setAttribute('id', 'data');
 tableSpace.appendChild(tableEl);
+let objCity = [];
+let formElement = document.getElementById('newCity');
 
 function busiTime() {
   for (let i = startTime; i <= startTime + hoursOpen; i++){
@@ -101,13 +104,13 @@ function City(name, min, max, avgCookie){
 
 busiTime();
 
-let Seattle = new City(cities[0][0], cities[0][1], cities[0][2], cities[0][3]);
-let Tokyo = new City(cities[1][0], cities[1][1], cities[1][2], cities[1][3]);
-let Dubai = new City(cities[2][0], cities[2][1], cities[2][2], cities[2][3]);
-let Paris = new City(cities[3][0], cities[3][1], cities[3][2], cities[3][3]);
-let Lima = new City(cities[4][0], cities[4][1], cities[4][2], cities[4][3]);
+function createPreSetCityObjsArray (){
+  for (let i = 0; i < cities.length; i++){
+    objCity.push(new City(cities[i][0], cities[i][1], cities[i][2], cities[i][3]));
+  }
+}
 
-let objCity = [Seattle, Tokyo, Dubai, Paris, Lima];
+createPreSetCityObjsArray();
 
 function tableHeadRow (){
   let tableHeadRow = document.createElement('tr');
@@ -135,7 +138,7 @@ function genData() {
 genData();
 
 function dataPrint (){
-  for (let i = 0; i <5; i++){
+  for (let i = 0; i < objCity.length; i++){
     objCity[i].printRow();
   }
 }
@@ -145,17 +148,18 @@ dataPrint();
 function totalArray (){
   let total = new Array(hoursOpen+1).fill(0);
   for (let i = 0; i <= hoursOpen; i++){
-    for(let x = 0; x < objCity.length; x++){
-      total[i] += objCity[x].cookieSold[i];
+    for(let j = 0; j < objCity.length; j++){
+      total[i] += objCity[j].cookieSold[i];
     }
   }
   return total;
-}
+};
 
 totalArray();
 
 function printTotal (array){
   let tableTotal = document.createElement('tr');
+  tableTotal.setAttribute('id', 'total');
   tableEl.appendChild(tableTotal);
   let totalEntry = document.createElement('td');
   tableTotal.appendChild(totalEntry);
@@ -166,9 +170,33 @@ function printTotal (array){
     tableTotal.appendChild(totalEntry);
     totalEntry.textContent = Math.round(array[i]);
     }
-}
+};
 
 printTotal(totalArray());
+
+formElement.addEventListener('submit', 
+  function(event){
+    event.preventDefault();
+    let cityName = event.target.city.value;
+    let min = parseInt(event.target.min.value);
+    let max = parseInt(event.target.max.value);
+    let avgCookie = parseInt(event.target.avgCookie.value);
+
+    objCity.push(new City(cityName, min, max, avgCookie));
+    console.log(objCity);
+
+    let table = document.getElementById('data');
+    let rowToDelete = document.getElementById('total');
+    table.removeChild(rowToDelete);
+
+    objCity[objCity.length - 1].visCount();
+    objCity[objCity.length - 1].cookCount(objCity[objCity.length - 1].customer);
+    objCity[objCity.length - 1].printRow();
+
+    totalArray();
+    printTotal(totalArray());
+  }
+);
 
 // let seattle = {
 //   min: 23,
