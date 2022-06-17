@@ -213,11 +213,6 @@ formElement.addEventListener('submit',
   }
 );
 
-let hi = objNameToString(objCity, 'name');
-
-console.log(typeof objCity[0]);
-console.log(hi);
-
 // let seattle = {
 //   min: 23,
 //   max: 65,
