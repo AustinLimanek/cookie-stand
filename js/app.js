@@ -5,10 +5,15 @@ let endTime = 7;
 let hoursOpen = 12 - startTime + endTime + 1;
 let time = [];
 let cities = [['Seattle', 23, 65, 6.3], ['Tokyo', 3, 24, 1.2], ['Dubai', 11, 38, 3.7], ['Paris', 20, 38, 2.3], ['Lima', 2, 16, 4.6]];
+let controlCurve = [0.5, 0.75, 1.0, 0.6, 0.8, 1.0, 0.7, 0.4, 0.6, 0.9, 0.7, 0.5, 0.3, 0.4, 0.6];
 let tableSpace = document.getElementById('summaryTable');
 let tableEl = document.createElement('table');
 tableEl.setAttribute('id', 'data');
 tableSpace.appendChild(tableEl);
+let table2Space = document.getElementById('employeeTable');
+let table2El = document.createElement('table');
+table2El.setAttribute('id', 'employee');
+table2Space.appendChild(table2El);
 let objCity = [];
 let formElement = document.getElementById('newCity');
 
@@ -57,10 +62,17 @@ function City(name, min, max, avgCookie){
   this.avgCookie = avgCookie;
   this.customer = [];
   this.cookieSold = [];
+  this.cookieTosser = [];
 
   this.visCount = function (){
     for (let i = 0; i < hoursOpen; i++){
       this.customer[i] = Math.random()*(this.max - this.min) + this.min;
+      if(this.customer[i] >= 40){
+      this.cookieTosser[i] = Math.ceil(this.customer[i]/20);
+      }
+      else{
+        this.cookieTosser[i] = 2;
+      }
     }
     return this.customer;
   };
@@ -98,17 +110,17 @@ function City(name, min, max, avgCookie){
     listElement.appendChild(totalElement);
   }
 
-  this.printRow = function (){
+  this.printRow = function (tableNumEl, property){
     let tableRow = document.createElement('tr');
     let nameEntry = document.createElement('td');
-    tableEl.appendChild(tableRow);
+    tableNumEl.appendChild(tableRow);
     tableRow.appendChild(nameEntry);
     nameEntry.textContent = name;
-    this.cookieSold[hoursOpen] = Math.round(sumArray(this.cookieSold));
+    this[property][hoursOpen] = Math.round(sumArray(this[property]));
 
     for (let i = 0; i <= hoursOpen; i++){
       let dataEntry = document.createElement('td');
-      dataEntry.textContent = Math.round(this.cookieSold[i]);
+      dataEntry.textContent = Math.round(this[property][i]);
       tableRow.appendChild(dataEntry);
     }
   }
@@ -116,17 +128,17 @@ function City(name, min, max, avgCookie){
 
 busiTime();
 
-function createPreSetCityObjsArray (){
+function fillingPreSetObjCityArray (){
   for (let i = 0; i < cities.length; i++){
     objCity.push(new City(cities[i][0], cities[i][1], cities[i][2], cities[i][3]));
   }
 }
 
-createPreSetCityObjsArray();
+fillingPreSetObjCityArray();
 
-function tableHeadRow (){
+function tableHeadRow (tableNumEl){
   let tableHeadRow = document.createElement('tr');
-  tableEl.appendChild(tableHeadRow);
+  tableNumEl.appendChild(tableHeadRow);
   let timeEntry = document.createElement('th');
   tableHeadRow.appendChild(timeEntry);
   timeEntry.textContent = 'Location';
@@ -138,7 +150,9 @@ function tableHeadRow (){
     }
 }
 
-tableHeadRow();
+tableHeadRow(tableEl);
+tableHeadRow(table2El);
+
 
 function genData() {
   for (let i = 0; i < objCity.length; i++){
@@ -149,30 +163,30 @@ function genData() {
 
 genData();
 
-function dataPrint (){
+function dataPrint (tableNumEl, property){
   for (let i = 0; i < objCity.length; i++){
-    objCity[i].printRow();
+    objCity[i].printRow(tableNumEl, property);
   }
 }
 
-dataPrint();
+dataPrint(tableEl, 'cookieSold');
+dataPrint(table2El, 'cookieTosser');
 
-function totalArray (){
+
+function totalArray (property){
   let total = new Array(hoursOpen+1).fill(0);
   for (let i = 0; i <= hoursOpen; i++){
     for(let j = 0; j < objCity.length; j++){
-      total[i] += objCity[j].cookieSold[i];
+      total[i] += objCity[j][property][i];
     }
   }
   return total;
 };
 
-totalArray();
-
-function printTotal (array){
+function printTotal (array, tableNumEl){
   let tableTotal = document.createElement('tr');
   tableTotal.setAttribute('id', 'total');
-  tableEl.appendChild(tableTotal);
+  tableNumEl.appendChild(tableTotal);
   let totalEntry = document.createElement('td');
   tableTotal.appendChild(totalEntry);
   totalEntry.textContent = 'Totals';
@@ -184,7 +198,9 @@ function printTotal (array){
     }
 };
 
-printTotal(totalArray());
+printTotal(totalArray('cookieSold'), tableEl);
+printTotal(totalArray('cookieTosser'), table2El);
+
 
 formElement.addEventListener('submit', 
   function(event){
@@ -201,13 +217,17 @@ formElement.addEventListener('submit',
       let table = document.getElementById('data');
       let rowToDelete = document.getElementById('total');
       table.removeChild(rowToDelete);
+      let table2 = document.getElementById('employee');
+      let rowToDelete2 = document.getElementById('total');
+      table2.removeChild(rowToDelete2);
 
       objCity[objCity.length - 1].visCount();
       objCity[objCity.length - 1].cookCount(objCity[objCity.length - 1].customer);
-      objCity[objCity.length - 1].printRow();
+      objCity[objCity.length - 1].printRow(tableEl, 'cookieSold');
+      objCity[objCity.length - 1].printRow(table2El, 'cookieTosser');
 
-      totalArray();
-      printTotal(totalArray());
+      printTotal(totalArray('cookieSold'), tableEl);
+      printTotal(totalArray('cookieTosser'), table2El);
     }
     else { alert(cityName +' was already added. Submit only novel store locations.'); }
   }
