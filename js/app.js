@@ -116,13 +116,13 @@ function City(name, min, max, avgCookie){
 
 busiTime();
 
-function createPreSetCityObjsArray (){
+function fillingPreSetObjCityArray (){
   for (let i = 0; i < cities.length; i++){
     objCity.push(new City(cities[i][0], cities[i][1], cities[i][2], cities[i][3]));
   }
 }
 
-createPreSetCityObjsArray();
+fillingPreSetObjCityArray();
 
 function tableHeadRow (){
   let tableHeadRow = document.createElement('tr');

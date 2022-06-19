@@ -5,12 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>cookie-stand</title>
+  <link href="css/reset.css" rel="stylesheet" type="text/css" />
   <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sansita:ital,wght@0,400;0,700;0,800;1,400;1,900&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <header>
-    <h1>Salmon Cookies</h1>
+    <section id="header">
+      <img id="logo" src='./img/fish.jpeg' alt='Fish Logo' />
+      <h1><b>Salmon Cookies</b></h1>
+    </section>
+    
     <nav>
       <a href="./sales.html">Sales Page</a>
       <a href="./store.html">Store</a>
@@ -19,35 +27,66 @@
   </header>
 
   <main>
-    <img src='./img/salmon.png' alt='Picture of an awesome fish' />
+    <section id="bigFish">
+      <img src='./img/salmon.png' alt='Picture of an awesome fish' />
+    </section>
+  
+    <section id="text">
+      <h2>
+        Our Mission:
+      </h2>
 
-    <p>
-      Salmon Cookies are coming soon to a store near you! Stay tuned. Folow us on social media.
-    </p>
-
-    <p>
-      <strong>Locations around the world:</strong><br>
-      Seattle: 738 Capitol Hill, Seattle, WA 98291<br>
-      Tokyo: <br>
-      Dubai: <br>
-      Paris: <br>
-      Lima: <br>
-    </p>
+      <p class="main">
+        We have been making our delicously irr
+      </p>
+  
+      <h2>
+        Locations Around the World:
+      </h2>
+      
+      <ul>
+        <li>
+          <a class="locations" href="https://www.google.com/maps/@47.6152228,-122.3209466,17.19z">Seattle, USA: 1003 E Pine St, Seattle, WA 98122</a>
+        </li>
+        <li>
+          <a href="https://www.google.com/maps/@35.6645022,139.7561523,19.67z">Tokyo, Japan: 4 Chome-12-8 Shinbashi, Minato City, Tokyo 105-0004</a>
+        </li>
+        <li>
+          <a href="https://www.google.com/maps/@25.1983204,55.2711122,16.58z">Dubai, UAE: Boulevard Plaza - Sheikh Mohammed bin Rashid Blvd</a>
+        </li>
+        <li>
+          <a href=https://www.google.com/maps/@48.8731503,2.2943701,17.31z>Paris, France: 5 Rue de Presbourg, 75116</a>
+        </li>
+        <li>
+          <a href=https://www.google.com/maps/@-12.0615499,-77.0435343,16.32z>Lima, Peru: Jr. Breña 204, Breña 15084</a>
+        </li>
+      </ul>
+    </section>
   </main>
 
   <footer>
-    <p>
-      <strong>Hours of Operation:</strong><br>
-      6 am - 8 pm everyday.
+    <h3>
+      Hours of Operation:
+    </h3>
+    
+    <p class="foot">
+      Monday-Saturday: 6 am - 8 pm<br>
+      Sunday: Closed 
     </p>
+    
+    <h3>
+      Contact Information:
+    </h3>
 
-    <p>
-      <strong>Contact Information:</strong><br>
+    <p class="foot">
        Phone: (206) 208 - 2022 <br>
-       Email: salmoncookie@gmail.com
+       Email: salmoncookies@gmail.com
     </p>
 
-    &copy; Copyright 2022 SalmonCookies
+    <p id="copy">
+      &copy; Copyright 2022 Salmon Cookies<br>
+      Designed by NoMichi
+    </p>
   </footer>
   
 </body>
