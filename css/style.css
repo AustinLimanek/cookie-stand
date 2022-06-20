@@ -138,6 +138,8 @@ h4 {
   font-size: 30px;
 }
 
+/* Sales Page */
+
 #summaryTable {
   padding-top: 10px;
   font-family: Arial, Helvetica, sans-serif;
@@ -189,3 +191,12 @@ td {
   padding: 20px 0px;
   font-family: 'Sansita', sans-serif;
 }
+
+/* Store */
+
+#store {
+  margin-top: 100px;
+  color: rgb(193, 135, 100);
+}
+
+/* Order Processing */
