@@ -192,6 +192,10 @@ td {
   font-family: 'Sansita', sans-serif;
 }
 
+.gallery{
+  height: 200px;
+}
+
 /* Store */
 
 #store {
